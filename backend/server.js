@@ -13,11 +13,9 @@ const port = 3000
 
 app.use(bodyparser.json())
 app.use(cors())
-// or as an es module:
-// import { MongoClient } from 'mongodb'
 
 // Connection URL
-const url = 'mongodb://localhost:27017';
+const url = process.env.MONGO_URI;
 const client = new MongoClient(url);
 
 // Database Name
@@ -42,13 +40,6 @@ app.post('/',async (req,res)=>{
 })
 
 // Delete a password
-// app.delete('/',async (req,res)=>{
-//     const password = req.body
-//     const collection = db.collection('passwords');
-//     console.log(password)
-//     const result = await collection.deleteOne(password);
-//     res.send({success:true,result:result})
-// })
 app.delete('/', async (req, res) => {
     try {
         const password = req.body;
